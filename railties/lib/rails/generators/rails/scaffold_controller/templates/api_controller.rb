@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 <% if namespaced? -%>
 require_dependency "<%= namespaced_path %>/application_controller"
 

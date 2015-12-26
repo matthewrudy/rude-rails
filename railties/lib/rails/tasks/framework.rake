@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :rails do
   desc "Update configs and some other initially generated files (or use just update:configs or update:bin)"
   task update: [ "update:configs", "update:bin" ]

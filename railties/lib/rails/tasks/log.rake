@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :log do
   desc "Truncates all *.log files in log/ to zero bytes (specify which logs with LOGS=test,development)"
   task :clear do
