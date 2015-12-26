@@ -34,7 +34,7 @@ module ActionView
         logger = ActionView::Base.logger
         return unless logger
 
-        message = "\n#{exception.class} (#{exception.message}):\n"
+        message = "\n#{exception.class} (#{exception.message}):\n".freeze.dup
         message << exception.annoted_source_code.to_s if exception.respond_to?(:annoted_source_code)
         message << "  " << exception.backtrace.join("\n  ")
         logger.fatal("#{message}\n\n")
