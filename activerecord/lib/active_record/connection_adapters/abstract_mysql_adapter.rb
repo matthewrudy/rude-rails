@@ -497,8 +497,8 @@ module ActiveRecord
       end
 
       def data_sources
-        sql = "SELECT table_name FROM information_schema.tables "
-        sql << "WHERE table_schema = #{quote(@config[:database])}"
+        sql = "SELECT table_name FROM information_schema.tables " +
+              "WHERE table_schema = #{quote(@config[:database])}"
 
         select_values(sql, 'SCHEMA')
       end
@@ -523,8 +523,8 @@ module ActiveRecord
         schema, name = table_name.to_s.split('.', 2)
         schema, name = @config[:database], schema unless name # A table was provided without a schema
 
-        sql = "SELECT table_name FROM information_schema.tables "
-        sql << "WHERE table_schema = #{quote(schema)} AND table_name = #{quote(name)}"
+        sql = "SELECT table_name FROM information_schema.tables " +
+              "WHERE table_schema = #{quote(schema)} AND table_name = #{quote(name)}"
 
         select_values(sql, 'SCHEMA').any?
       end
@@ -539,8 +539,8 @@ module ActiveRecord
         schema, name = view_name.to_s.split('.', 2)
         schema, name = @config[:database], schema unless name # A view was provided without a schema
 
-        sql = "SELECT table_name FROM information_schema.tables WHERE table_type = 'VIEW'"
-        sql << " AND table_schema = #{quote(schema)} AND table_name = #{quote(name)}"
+        sql = "SELECT table_name FROM information_schema.tables WHERE table_type = 'VIEW'" +
+              " AND table_schema = #{quote(schema)} AND table_name = #{quote(name)}"
 
         select_values(sql, 'SCHEMA').any?
       end
@@ -708,15 +708,15 @@ module ActiveRecord
       # Maps logical Rails types to MySQL-specific data types.
       def type_to_sql(type, limit = nil, precision = nil, scale = nil, unsigned = nil)
         sql = case type.to_s
-        when 'integer'
+        when 'integer'.freeze
           integer_to_sql(limit)
-        when 'text'
+        when 'text'.freeze
           text_to_sql(limit)
-        when 'blob'
+        when 'blob'.freeze
           binary_to_sql(limit)
         when 'binary'
           if (0..0xfff) === limit
-            "varbinary(#{limit})"
+            "varbinary(#{limit})".freeze
           else
             binary_to_sql(limit)
           end
@@ -724,7 +724,7 @@ module ActiveRecord
           super(type, limit, precision, scale)
         end
 
-        sql << ' unsigned' if unsigned && type != :primary_key
+        sql = "#{sql} unsigned" if unsigned && type != :primary_key
         sql
       end
 
@@ -991,7 +991,7 @@ module ActiveRecord
         # http://dev.mysql.com/doc/refman/5.7/en/set-statement.html#id944430
         # (trailing comma because variable_assignments will always have content)
         if @config[:encoding]
-          encoding = "NAMES #{@config[:encoding]}"
+          encoding = "NAMES #{@config[:encoding]}".freeze.dup
           encoding << " COLLATE #{@config[:collation]}" if @config[:collation]
           encoding << ", "
         end
