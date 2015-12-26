@@ -276,7 +276,7 @@ module ActionController
       return unless logger
 
       logger.fatal do
-        message = "\n#{exception.class} (#{exception.message}):\n"
+        message = "\n#{exception.class} (#{exception.message}):\n".freeze.dup
         message << exception.annoted_source_code.to_s if exception.respond_to?(:annoted_source_code)
         message << "  " << exception.backtrace.join("\n  ")
         "#{message}\n\n"

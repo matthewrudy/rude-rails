@@ -210,8 +210,8 @@ module ActionDispatch
                 missing_keys << missing_key
               }
               constraints = Hash[@route.requirements.merge(params).sort_by{|k,v| k.to_s}]
-              message = "No route matches #{constraints.inspect}"
-              message << " missing required keys: #{missing_keys.sort.inspect}"
+              message = "No route matches #{constraints.inspect}" +
+              " missing required keys: #{missing_keys.sort.inspect}"
 
               raise ActionController::UrlGenerationError, message
             end

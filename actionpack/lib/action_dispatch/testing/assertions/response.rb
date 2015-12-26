@@ -87,12 +87,12 @@ module ActionDispatch
         end
 
         def generate_response_message(type, code = @response.response_code)
-          "Expected response to be a <#{type}>, but was a <#{code}>"
-          .concat location_if_redirected
+          message = "Expected response to be a <#{type}>, but was a <#{code}>".freeze.dup
+          message << location_if_redirected
         end
 
         def location_if_redirected
-          return '' unless @response.redirection? && @response.location.present?
+          return ''.freeze unless @response.redirection? && @response.location.present?
           location = normalize_argument_to_redirection(@response.location)
           " redirect to <#{location}>"
         end

@@ -31,7 +31,7 @@ module ActionDispatch
       return false unless path.valid_encoding?
       path = Rack::Utils.clean_path_info path
 
-      paths = [path, "#{path}#{ext}", "#{path}/#{@index}#{ext}"]
+      paths = [path, "#{path}#{ext}".freeze.dup, "#{path}/#{@index}#{ext}".freeze.dup]
 
       if match = paths.detect { |p|
         path = File.join(@root, p.force_encoding('UTF-8'.freeze))

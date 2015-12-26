@@ -22,13 +22,13 @@ module ActionDispatch
         if clean_params.empty?
           'None'
         else
-          PP.pp(clean_params, "", 200)
+          PP.pp(clean_params, "".freeze.dup, 200)
         end
       end
 
       def debug_headers(headers)
         if headers.present?
-          headers.inspect.gsub(',', ",\n")
+          headers.inspect.gsub(',', ",\n".freeze)
         else
           'None'
         end
@@ -157,7 +157,7 @@ module ActionDispatch
       trace = wrapper.framework_trace if trace.empty?
 
       ActiveSupport::Deprecation.silence do
-        message = "\n#{exception.class} (#{exception.message}):\n"
+        message = "\n#{exception.class} (#{exception.message}):\n".freeze.dup
         message << exception.annoted_source_code.to_s if exception.respond_to?(:annoted_source_code)
         message << "  " << trace.join("\n  ")
         logger.fatal("#{message}\n\n")

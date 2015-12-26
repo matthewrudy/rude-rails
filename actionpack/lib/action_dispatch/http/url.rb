@@ -159,7 +159,7 @@ module ActionDispatch
           subdomain  = options.fetch :subdomain, true
           domain     = options[:domain]
 
-          host = ""
+          host = "".freeze.dup
           if subdomain == true
             return _host if domain.nil?
 

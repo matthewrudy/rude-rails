@@ -19,7 +19,7 @@ module ActionDispatch
         end
 
         def to_s
-          Visitors::String::INSTANCE.accept(self, '')
+          Visitors::String::INSTANCE.accept(self, "".freeze.dup)
         end
 
         def to_dot

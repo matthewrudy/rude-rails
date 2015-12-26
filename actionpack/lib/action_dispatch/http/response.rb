@@ -75,7 +75,7 @@ module ActionDispatch # :nodoc:
     LOCATION     = "Location".freeze
     NO_CONTENT_CODES = [100, 101, 102, 204, 205, 304]
 
-    cattr_accessor(:default_charset) { "utf-8" }
+    cattr_accessor(:default_charset) { "utf-8".freeze }
     cattr_accessor(:default_headers)
 
     include Rack::Response::Helpers
@@ -97,7 +97,7 @@ module ActionDispatch # :nodoc:
 
       def body
         @str_body ||= begin
-                        buf = ''
+                        buf = "".freeze.dup
                         each { |chunk| buf << chunk }
                         buf
                       end
