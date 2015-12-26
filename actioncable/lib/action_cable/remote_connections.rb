@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ActionCable
   # If you need to disconnect a given connection, you go through the RemoteConnections. You find the connections you're looking for by
   # searching the identifier declared on the connection. Example:

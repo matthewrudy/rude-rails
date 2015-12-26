@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # FIXME: Cargo culted fix from https://github.com/celluloid/celluloid-pool/issues/10
 require 'celluloid/current'
 

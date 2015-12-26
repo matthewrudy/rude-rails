@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'eventmachine'
 EventMachine.epoll  if EventMachine.epoll?
 EventMachine.kqueue if EventMachine.kqueue?

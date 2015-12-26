@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ActionCable
   module Server
     # Collection class for all the connections that's been established on this specific server. Remember, usually you'll run many cable servers, so
