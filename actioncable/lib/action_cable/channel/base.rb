@@ -249,10 +249,9 @@ module ActionCable
         end
 
         def action_signature(action, data)
-          signature = String.new
-          signature << "#{self.class.name}##{action}".freeze
+          signature = "#{self.class.name}##{action}".freeze.dup
           if (arguments = data.except('action')).any?
-            signature << "(#{arguments.inspect})".freeze
+            signature << "(#{arguments.inspect})"
           end
           signature
         end
