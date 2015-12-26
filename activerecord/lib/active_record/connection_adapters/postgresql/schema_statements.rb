@@ -609,6 +609,7 @@ module ActiveRecord
           end
 
           sql = '#{sql}[]'.freeze if array && type != :primary_key
+          sql
         end
 
         # PostgreSQL requires the ORDER BY columns in the select list for distinct queries, and
