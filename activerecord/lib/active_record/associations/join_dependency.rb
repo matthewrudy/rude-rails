@@ -213,8 +213,8 @@ module ActiveRecord
       end
 
       def table_alias_for(reflection, parent, join)
-        name = "#{reflection.plural_name}_#{parent.table_name}"
-        name << "_join" if join
+        name = "#{reflection.plural_name}_#{parent.table_name}".freeze
+        name = "#{name}_join".freeze if join
         name
       end
 

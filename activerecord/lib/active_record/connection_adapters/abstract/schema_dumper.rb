@@ -9,7 +9,7 @@ module ActiveRecord
     module ColumnDumper
       def column_spec(column)
         spec = prepare_column_options(column)
-        (spec.keys - [:name, :type]).each{ |k| spec[k].insert(0, "#{k}: ")}
+        (spec.keys - [:name, :type]).each{ |k| spec[k] = "#{k}: #{spec[k]}"}
         spec
       end
 
@@ -26,7 +26,7 @@ module ActiveRecord
         spec = {}
         spec[:name]      = column.name.inspect
         spec[:type]      = schema_type(column)
-        spec[:null]      = 'false' unless column.null
+        spec[:null]      = 'false'.freeze unless column.null
 
         if limit = schema_limit(column)
           spec[:limit] = limit

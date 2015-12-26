@@ -453,7 +453,7 @@ module ActiveRecord
           quoted_table_name = quote_table_name(table_name)
           quoted_column_name = quote_column_name(column_name)
           sql_type = type_to_sql(type, options[:limit], options[:precision], options[:scale], options[:array])
-          sql = "ALTER TABLE #{quoted_table_name} ALTER COLUMN #{quoted_column_name} TYPE #{sql_type}"
+          sql = "ALTER TABLE #{quoted_table_name} ALTER COLUMN #{quoted_column_name} TYPE #{sql_type}".freeze.dup
           if options[:collation]
             sql << " COLLATE \"#{options[:collation]}\""
           end
@@ -599,17 +599,16 @@ module ActiveRecord
             end
           when 'integer'
             case limit
-            when 1, 2; 'smallint'
-            when nil, 3, 4; 'integer'
-            when 5..8; 'bigint'
+            when 1, 2; 'smallint'.freeze
+            when nil, 3, 4; 'integer'.freeze
+            when 5..8; 'bigint'.freeze
             else raise(ActiveRecordError, "No integer type has byte size #{limit}. Use a numeric with precision 0 instead.")
             end
           else
             super(type, limit, precision, scale)
           end
 
-          sql << '[]' if array && type != :primary_key
-          sql
+          sql = '#{sql}[]'.freeze if array && type != :primary_key
         end
 
         # PostgreSQL requires the ORDER BY columns in the select list for distinct queries, and

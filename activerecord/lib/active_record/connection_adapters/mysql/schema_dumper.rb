@@ -6,11 +6,11 @@ module ActiveRecord
         def column_spec_for_primary_key(column)
           spec = {}
           if column.bigint?
-            spec[:id] = ':bigint'
-            spec[:default] = schema_default(column) || 'nil' unless column.auto_increment?
-            spec[:unsigned] = 'true' if column.unsigned?
+            spec[:id] = ':bigint'.freeze
+            spec[:default] = schema_default(column) || 'nil'.freeze unless column.auto_increment?
+            spec[:unsigned] = 'true'.freeze if column.unsigned?
           elsif column.auto_increment?
-            spec[:unsigned] = 'true' if column.unsigned?
+            spec[:unsigned] = 'true'.freeze if column.unsigned?
             return if spec.empty?
           else
             spec[:id] = column.type.inspect
@@ -21,7 +21,7 @@ module ActiveRecord
 
         def prepare_column_options(column)
           spec = super
-          spec[:unsigned] = 'true' if column.unsigned?
+          spec[:unsigned] = 'true'.freeze if column.unsigned?
           spec
         end
 
@@ -33,7 +33,7 @@ module ActiveRecord
 
         def schema_type(column)
           if column.sql_type == 'tinyblob'
-            'blob'
+            'blob'.freeze
           else
             super
           end

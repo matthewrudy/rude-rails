@@ -7,9 +7,9 @@ module ActiveRecord
           spec = {}
           if column.serial?
             return unless column.bigint?
-            spec[:id] = ':bigserial'
+            spec[:id] = ':bigserial'.freeze
           elsif column.type == :uuid
-            spec[:id] = ':uuid'
+            spec[:id] = ':uuid'.freeze
             spec[:default] = column.default_function.inspect
           else
             spec[:id] = column.type.inspect
@@ -21,7 +21,7 @@ module ActiveRecord
         # Adds +:array+ option to the default set
         def prepare_column_options(column)
           spec = super
-          spec[:array] = 'true' if column.array?
+          spec[:array] = 'true'.freeze if column.array?
           spec
         end
 
@@ -36,9 +36,9 @@ module ActiveRecord
           return super unless column.serial?
 
           if column.bigint?
-            'bigserial'
+            'bigserial'.freeze
           else
-            'serial'
+            'serial'.freeze
           end
         end
 
