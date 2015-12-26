@@ -249,11 +249,12 @@ module ActionCable
         end
 
         def action_signature(action, data)
-          "#{self.class.name}##{action}".tap do |signature|
-            if (arguments = data.except('action')).any?
-              signature << "(#{arguments.inspect})"
-            end
+          signature = String.new
+          signature << "#{self.class.name}##{action}".freeze
+          if (arguments = data.except('action')).any?
+            signature << "(#{arguments.inspect})".freeze
           end
+          signature
         end
 
         def transmit_subscription_confirmation
