@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'active_record/connection_adapters/abstract_adapter'
 require 'active_record/connection_adapters/mysql/schema_creation'
 require 'active_record/connection_adapters/mysql/schema_definitions'
