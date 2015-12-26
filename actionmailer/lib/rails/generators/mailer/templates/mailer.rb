@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 <% module_namespacing do -%>
 class <%= class_name %>Mailer < ApplicationMailer
 <% actions.each do |action| -%>
