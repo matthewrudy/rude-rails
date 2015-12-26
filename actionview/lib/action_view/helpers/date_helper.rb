@@ -997,12 +997,12 @@ module ActionView
           select_options[:disabled] = 'disabled' if @options[:disabled]
           select_options[:class] = [select_options[:class], type].compact.join(' ') if @options[:with_css_classes]
 
-          select_html = "\n"
-          select_html << content_tag("option".freeze, '', :value => '') + "\n" if @options[:include_blank]
-          select_html << prompt_option_tag(type, @options[:prompt]) + "\n" if @options[:prompt]
+          select_html = "\n".freeze.dup
+          select_html << content_tag("option".freeze, '', :value => '') + "\n".freeze if @options[:include_blank]
+          select_html << prompt_option_tag(type, @options[:prompt]) + "\n".freeze if @options[:prompt]
           select_html << select_options_as_html
 
-          (content_tag("select".freeze, select_html.html_safe, select_options) + "\n").html_safe
+          (content_tag("select".freeze, select_html.html_safe, select_options) + "\n".freeze).html_safe
         end
 
         # Builds a prompt option tag with supplied options or from default options.
@@ -1063,7 +1063,7 @@ module ActionView
         # Given an ordering of datetime components, create the selection HTML
         # and join them with their appropriate separators.
         def build_selects_from_types(order)
-          select = ''
+          select = "".freeze.dup
           first_visible = order.find { |type| !@options[:"discard_#{type}"] }
           order.reverse_each do |type|
             separator = separator(type) unless type == first_visible # don't add before first visible field

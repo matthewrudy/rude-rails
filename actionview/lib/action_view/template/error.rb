@@ -132,7 +132,7 @@ module ActionView
         end
 
         def formatted_code_for(source_code, line_counter, indent, output)
-          start_value = (output == :html) ? {} : ""
+          start_value = (output == :html) ? {} : "".freeze.dup
           source_code.inject(start_value) do |result, line|
             line_counter += 1
             if output == :html

@@ -150,7 +150,7 @@ module ActionView
 
         def tag_options(options, escape = true)
           return if options.blank?
-          output = ""
+          output = "".freeze.dup
           sep    = " ".freeze
           options.each_pair do |key, value|
             if TAG_PREFIXES.include?(key) && value.is_a?(Hash)

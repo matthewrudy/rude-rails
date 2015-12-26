@@ -105,8 +105,8 @@ module ActionView
         @request = @controller.request
         # empty string ensures buffer has UTF-8 encoding as
         # new without arguments returns ASCII-8BIT encoded buffer like String#new
-        @output_buffer = ActiveSupport::SafeBuffer.new ''
-        @rendered = ''
+        @output_buffer = ActiveSupport::SafeBuffer.new ''.freeze.dup
+        @rendered = ''.freeze.dup
 
         make_test_case_available_to_view!
         say_no_to_protect_against_forgery!

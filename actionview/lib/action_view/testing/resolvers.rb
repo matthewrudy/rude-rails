@@ -21,7 +21,7 @@ module ActionView #:nodoc:
   private
 
     def query(path, exts, formats)
-      query = ""
+      query = "".freeze.dup
       EXTENSIONS.each_key do |ext|
         query << '(' << exts[ext].map {|e| e && Regexp.escape(".#{e}") }.join('|') << '|)'
       end
@@ -51,4 +51,3 @@ module ActionView #:nodoc:
     end
   end
 end
-
