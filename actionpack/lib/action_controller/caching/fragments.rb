@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ActionController
   module Caching
     # Fragment caching is used for caching various blocks within

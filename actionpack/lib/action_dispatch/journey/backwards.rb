@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Rack # :nodoc:
   Mount = ActionDispatch::Journey::Router
   Mount::RouteSet = ActionDispatch::Journey::Router

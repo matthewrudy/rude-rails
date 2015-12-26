@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'active_support/core_ext/hash/reverse_merge'
 require 'active_support/core_ext/hash/slice'
 require 'active_support/core_ext/enumerable'
