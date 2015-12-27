@@ -19,11 +19,12 @@ module ActiveRecord
     def exec_explain(queries) # :nodoc:
       str = queries.map do |sql, bind|
         [].tap do |msg|
-          msg << "EXPLAIN for: #{sql}".freeze.dup
+          str = "EXPLAIN for: #{sql}"
           unless bind.empty?
             bind_msg = bind.map {|col, val| [col.name, val]}.inspect
-            msg.last << " #{bind_msg}"
+            str = "#{str} #{bind_msg}"
           end
+          msg << str
           msg << connection.explain(sql, bind)
         end.join("\n")
       end.join("\n")

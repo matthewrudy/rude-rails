@@ -991,7 +991,8 @@ module ActiveRecord
         # http://dev.mysql.com/doc/refman/5.7/en/set-statement.html#id944430
         # (trailing comma because variable_assignments will always have content)
         if @config[:encoding]
-          encoding = "NAMES #{@config[:encoding]}".freeze.dup
+          encoding = "".freeze.dup
+          encoding << "NAMES #{@config[:encoding]}"
           encoding << " COLLATE #{@config[:collation]}" if @config[:collation]
           encoding << ", "
         end
